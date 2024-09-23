@@ -36,10 +36,6 @@
     "../tests/**/*.js",
     "../tests/**/*.ts",
     "../tests/**/*.svelte",
-    "../../.github/workflows/superlinter.yml",
-    "../src/app.d.ts",
-    "../src/lib/index.ts",
-    "../vite.config.ts"
   ],
   "exclude": [
     "../node_modules/**",
