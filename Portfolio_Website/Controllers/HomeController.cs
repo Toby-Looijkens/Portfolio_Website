@@ -13,7 +13,7 @@ namespace Portfolio_Website.Controllers
         {
             UserManager userManager = new UserManager(userRepository);
             Logic.Entities.User user = await userManager.CreateUser(new Logic.Entities.User(new Guid(), "f", "f", 1));
-            
+
             return Ok(user);
         }
     }

@@ -8,8 +8,8 @@ namespace Logic.Entities
 {
     public class User
     {
-        public User(string username, string email, int roleID, string password) 
-        { 
+        public User(string username, string email, int roleID, string password)
+        {
             ID = Guid.NewGuid();
             Username = username;
             Email = email;

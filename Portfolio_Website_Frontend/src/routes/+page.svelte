@@ -13,8 +13,8 @@
     <div id="works">
       <div id="selectbar">
         <h3 id="personal-works">Personal works</h3>
-        <h3 id="advertisements">ad</h3>
-        <h3 id="architecture">arch</h3>
+        <h3 id="advertisements"></h3>
+        <h3 id="architecture"></h3>
       </div>
       <div id="projects">
         <Gallerycard></Gallerycard>
