@@ -10,8 +10,8 @@ namespace Logic.Business
 {
     public class UserManager
     {
-        private readonly IUserRepository userDB; 
-        public UserManager(IUserRepository userRepository) 
+        private readonly IUserRepository userDB;
+        public UserManager(IUserRepository userRepository)
         {
             userDB = userRepository;
         }
