@@ -16,8 +16,8 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Portfolio_Website/Portfolio_Website.csproj", "Portfolio_Website/"]
 RUN dotnet restore "./Portfolio_Website/Portfolio_Website.csproj"
-COPY . .
 WORKDIR "/src/Portfolio_Website"
+COPY . .
 RUN dotnet build "./Portfolio_Website.csproj" -c %BUILD_CONFIGURATION% -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
