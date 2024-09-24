@@ -11,10 +11,25 @@ namespace DB_Library
     public class UserRepository : IUserRepository
     {
         public UserRepository() { }
-        Task<IEnumerable<User>> GetAllUsers();
-        Task<IEnumerable<User>> GetUserByID(Guid ID);
-        Task<User> CreateUser(User user);
-        Task<IEnumerable<User>> UpdateUser();
-        Task<IEnumerable<int>> DeleteUser(Guid ID);
+        public Task<IEnumerable<User>> GetAllUsers()
+        {
+            return null;
+        }
+        public Task<IEnumerable<User>> GetUserByID(Guid ID)
+        {
+            return null;
+        }
+        public Task<User> CreateUser(User user)
+        {
+            return null;
+        }
+        public Task<IEnumerable<User>> UpdateUser()
+        {
+            return null;
+        }
+        public Task<IEnumerable<int>> DeleteUser(Guid ID)
+        {
+            return null;
+        }
     }
 }
