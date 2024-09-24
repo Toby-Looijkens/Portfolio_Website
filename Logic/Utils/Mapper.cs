@@ -11,7 +11,7 @@ namespace Logic.Utils
     {
         public User MapFromAsync()
         {
-
+            return new User("test", "test", 1, "test");
         }
     }
 }
