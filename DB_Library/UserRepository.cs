@@ -1,4 +1,5 @@
-﻿using Logic.Entities;
+﻿using DB_Library;
+using Logic.Entities;
 using Logic.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -6,30 +7,82 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace DB_Library
 {
     public class UserRepository : IUserRepository
     {
+        DBContext _context = new DBContext();
         public UserRepository() { }
-        public Task<IEnumerable<User>> GetAllUsers()
+        public async Task<IEnumerable<User>> GetAllUsers()
         {
-            return null;
+            return await _context.Users.ToArrayAsync();
         }
-        public Task<IEnumerable<User>> GetUserByID(Guid ID)
+        public async Task<User> GetUserByID(Guid ID)
         {
-            return null;
+            return _context.Users
+                .Where(u => u.ID == ID)
+                .FirstOrDefault();
         }
-        public Task<User> CreateUser(User user)
+        public async Task<User> CreateUser(User user)
         {
-            return null;
+            _context.Users
+                .Add(user);
+            if (_context.SaveChanges() > 0 )
+            {
+                return user;
+            } else
+            {
+                throw new Exception("User was not able to be created at this moment in time");
+            }
+
         }
-        public Task<IEnumerable<User>> UpdateUser()
+        public async Task<User> UpdateUser(User user)
         {
-            return null;
+            User result = _context.Users
+                .Where(u => u.ID == user.ID)
+                .FirstOrDefault();
+            if (result != null) { 
+                result.Username = user.Username;
+                result.Email = user.Email;
+                result.RoleID = user.RoleID;
+                result.Password = user.Password;
+                try {
+                    if (_context.SaveChanges() == 1) {
+                        return user;
+                    } else
+                    {
+                        throw new Exception("User was not able to be updated at this time");
+                    }
+                } catch (Exception ex) {
+                    Console.WriteLine(ex.Message);
+                    throw;
+                }
+            } else {
+                throw new Exception("User doesn't exist");
+            }
         }
-        public Task<IEnumerable<int>> DeleteUser(Guid ID)
+        public async Task<int> DeleteUser(Guid ID)
         {
-            return null;
+            var result = _context.Users
+                .Where(u => u.ID == ID)
+                .FirstOrDefault();
+            if (result != null)
+            {
+                _context.Users.Remove(result);
+                try
+                {
+                    return _context.SaveChanges(); 
+                } catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw;
+                }
+            } else
+            {
+                throw new Exception("User doesn't exist");  
+            }
         }
     }
 }

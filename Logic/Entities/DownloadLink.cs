@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Logic.Entities
 {
-    public class Role
+    public class DownloadLink
     {
         [Key]
         public Guid ID { get; set; }
-        public string Name { get; set; } = null!;
+        public string URL { get; set; }
     }
 }

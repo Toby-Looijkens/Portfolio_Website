@@ -28,7 +28,7 @@ namespace Logic.Business
 
         public User[] GetAllUsers()
         {
-            return new User[0];
+            return null;
         }
 
         public async Task<User> CreateUser(User user)
