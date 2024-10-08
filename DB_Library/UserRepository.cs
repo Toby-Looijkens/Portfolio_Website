@@ -19,12 +19,14 @@ namespace DB_Library
         {
             return await _context.Users.ToArrayAsync();
         }
+
         public async Task<User> GetUserByID(Guid ID)
         {
             return _context.Users
                 .Where(u => u.ID == ID)
                 .FirstOrDefault();
         }
+
         public async Task<User> CreateUser(User user)
         {
             _context.Users
@@ -38,6 +40,7 @@ namespace DB_Library
             }
 
         }
+
         public async Task<User> UpdateUser(User user)
         {
             User result = _context.Users
@@ -63,6 +66,7 @@ namespace DB_Library
                 throw new Exception("User doesn't exist");
             }
         }
+
         public async Task<int> DeleteUser(Guid ID)
         {
             var result = _context.Users

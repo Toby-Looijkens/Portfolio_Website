@@ -9,9 +9,16 @@ namespace Portfolio_Website.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HomeController : Controller
+    public class UserController : Controller
     {
         private readonly IUserRepository userRepository = new UserRepository();
+        [HttpGet(nameof(GetAllUsers))]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            UserManager usersManager = new UserManager(userRepository);
+            return Ok(usersManager.GetAllUsers());
+        }
+
         [HttpPost(nameof(CreateUser))]
         public async Task<IActionResult> CreateUser(User user)
         {
@@ -20,5 +27,6 @@ namespace Portfolio_Website.Controllers
 
             return Ok(_user);
         }
+
     }
 }
