@@ -1,5 +1,6 @@
 ﻿using Logic.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,6 @@ namespace DB_Library
     // Sql server connection string
     public class DBContext : DbContext
     {
-        string connectionString = "Server=localhost; Database=S3-Site-DB;User Id = DESKTOP-GHB40U5\\looij; Password=; TrustServerCertificate=true; Integrated Security = true;";
         public DbSet<GalleryItem> Gallery { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Role> Roles { get; set; } = null!;
@@ -25,7 +25,7 @@ namespace DB_Library
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer("Server=localhost; Database=S3-Site-DB;User Id = DESKTOP-6T3T1M6\\looij; Password=; TrustServerCertificate=true; Integrated Security = true;");
         }
     }
 }
