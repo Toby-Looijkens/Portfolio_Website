@@ -15,7 +15,7 @@ namespace DB_Library
         public DbSet<GalleryItem> Gallery { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Role> Roles { get; set; } = null!;
-        public DbSet<ImageLink> ImageLinks { get; set; } = null!;
+        public DbSet<TransferableFile> ImageLinks { get; set; } = null!;
         public DbSet<DownloadLink> DownloadLinks { get; set; } = null!;
 
         public DBContext(DbContextOptions<DBContext> options)

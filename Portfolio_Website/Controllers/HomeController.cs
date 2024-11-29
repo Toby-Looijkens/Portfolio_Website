@@ -11,7 +11,7 @@ namespace Portfolio_Website.Controllers
     [ApiController]
     public class UserController : Controller
     {
-        private readonly IUserRepository userRepository = new UserRepository();
+        private readonly IUserRepository userRepository = new DB_Library.Repositories.UserRepository();
         [HttpGet(nameof(GetAllUsers))]
         public async Task<IActionResult> GetAllUsers()
         {
