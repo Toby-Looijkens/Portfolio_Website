@@ -31,7 +31,7 @@ namespace Logic.Business
             return await userDB.GetAllUsers();
         }
 
-        public async Task<User> GetUserById(Guid ID) { 
+        public async Task<User> GetUserByID(Guid ID) { 
             return await userDB.GetUserByID(ID);
         }
 

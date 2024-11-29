@@ -16,7 +16,7 @@ namespace DB_Library.Repositories
         public UserRepository() { }
         public async Task<IEnumerable<User>> GetAllUsers()
         {
-            return await _context.Users.ToArrayAsync();
+            return _context.Users.ToArray();
         }
 
         public async Task<User> GetUserByID(Guid ID)

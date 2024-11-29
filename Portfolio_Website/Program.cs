@@ -35,7 +35,7 @@ public partial class Program
     {
         services.AddDbContext<TContext>(options =>
         {
-            options.UseSqlServer("Server=localhost; Database=S3-Site-DB;User Id = DESKTOP-GHB40U5\\looij; Password=; TrustServerCertificate=true; Integrated Security = true;");
+            options.UseSqlServer(configurations["Connectionstrings:DefaultConnection"]);
         });
     }
 
