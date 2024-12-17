@@ -1,6 +1,7 @@
 ﻿using Logic.Entities;
 using Logic.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -24,26 +25,32 @@ namespace DB_Library.Repositories
         }
         public GalleryItemRepository() { }
 
-        public async Task<TransferableFile> CreateGalleryItem(GalleryItem item)
+        public async Task<GalleryItem> GetGalleryItemByID(Guid id)
         {
-            item.Thumbnail = await UploadFileToStorage(item.Thumbnail.File);
+            var result = _context.Gallery
+                .Where(x => x.ID == id)
+                .Include(x => x.Tags)
+                .ToList();
 
-            for (int i = 0; i < item.GalleryImages.Count(); i++) 
-            {
-                item.GalleryImages[i] = await UploadFileToStorage(item.GalleryImages[i].File);
-            }
-
-            for (int i = 0; i < item.GalleryDownloads.Count(); i++)
-            {
-                item.GalleryDownloads[i] = await UploadFileToStorage(item.GalleryDownloads[i].File);
-            }
-
-
-            _context.Add(item);
-            _context.SaveChanges();
+            return result.FirstOrDefault();
         }
 
-        private async Task<TransferableFile> UploadFileToStorage(IFormFile file)
+        public async Task<GalleryItem> CreateGalleryItem(GalleryItem item)
+        {
+            //item.Thumbnail = await UploadFileToStorage(item.Thumbnail.File);
+
+            /*for (int i = 0; i < item.GalleryImages.Count(); i++) 
+            {
+                item.GalleryImages[i] = await UploadFileToStorage(item.GalleryImages[i].File);
+            }*/
+
+            var entity = _context.Add(item);
+            
+            _context.SaveChanges();
+            return entity.Entity;
+        }
+
+        private async Task<ImageLink> UploadFileToStorage(IFormFile file)
         {
             using (var multipartFormContent = new MultipartFormDataContent())
             {
@@ -57,7 +64,7 @@ namespace DB_Library.Repositories
                 //Send it
                 var response = await client.PostAsync("http://localhost:5195/api/FileManager/UploadFile", multipartFormContent);
                 response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<TransferableFile>(await response.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<ImageLink>(await response.Content.ReadAsStringAsync());
             }
         }
     }

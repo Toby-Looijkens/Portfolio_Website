@@ -1,5 +1,7 @@
-﻿using Logic.Entities;
+﻿using Logic.DTOs;
+using Logic.Entities;
 using Logic.Interfaces;
+using Logic.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +18,18 @@ namespace Logic.Business
             IGalleryItemRepository = gir;
         }
 
+        public async Task<GalleryItemDTO> GetGalleryItemByID(Guid id)
+        {
+            var result = await IGalleryItemRepository.GetGalleryItemByID(id);
+            Mapper mapper = new Mapper();
+            
+            return mapper.MapGalleryItemToDTO(result);
+        }
+
         public async Task<string> CreateGalleryItem(GalleryItem item)
         {
-            TransferableFile file = await IGalleryItemRepository.CreateGalleryItem(item);
-            return file.ID.ToString();
+            GalleryItem galleryItem = await IGalleryItemRepository.CreateGalleryItem(item);
+            return galleryItem.ID.ToString();
         }
     }
 }

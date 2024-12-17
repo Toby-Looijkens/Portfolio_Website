@@ -4,6 +4,7 @@ using DB_Library;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DB_Library.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20241216135633_MadeThumbnailAbleToHoldNullValue")]
+    partial class MadeThumbnailAbleToHoldNullValue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace DB_Library.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("GalleryItemTag", b =>
+            modelBuilder.Entity("GalleryItemsToTagsJoinTable", b =>
                 {
                     b.Property<Guid>("GalleryItemsID")
                         .HasColumnType("uniqueidentifier");
@@ -34,7 +37,7 @@ namespace DB_Library.Migrations
 
                     b.HasIndex("TagsID");
 
-                    b.ToTable("GalleryItemTags", (string)null);
+                    b.ToTable("GalleryItemsToTagsJoinTable");
                 });
 
             modelBuilder.Entity("Logic.Entities.DownloadLink", b =>
@@ -167,7 +170,7 @@ namespace DB_Library.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("GalleryItemTag", b =>
+            modelBuilder.Entity("GalleryItemsToTagsJoinTable", b =>
                 {
                     b.HasOne("Logic.Entities.GalleryItem", null)
                         .WithMany()

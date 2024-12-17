@@ -19,55 +19,41 @@ namespace Portfolio_Website.Controllers
             return Ok();
         }
 
-        [HttpPost(nameof(CreateGalleryItem))]
-        public async Task<IActionResult> CreateGalleryItem(
-            string title, 
-            string description, 
-            IFormFile? thumbnail, 
-            IFormFileCollection images, 
-            IFormFileCollection downloads, 
-            bool hidden
-            ) 
+        [HttpGet(nameof(GetGalleryItemByID))]
+        public async Task<IActionResult> GetGalleryItemByID(Guid id)
         {
-            FileHandler fileHandler = new FileHandler();
-            List<TransferableFile> tempImages = new List<TransferableFile>();
-            List<TransferableFile> tempDownloads = new List<TransferableFile>();
-
-            foreach (IFormFile image in images) {
-                try
-                {
-                    tempImages.Add(fileHandler.CreateTransferableFile(image));
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
-            }
-
-            foreach (IFormFile download in downloads)
-            {
-                try
-                {
-                    tempDownloads.Add(fileHandler.CreateTransferableFile(download));
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
-            }
-
-            GalleryItem item = new GalleryItem(
-                title, 
-                description, 
-                fileHandler.CreateTransferableFile(thumbnail), 
-                tempImages, 
-                tempDownloads, 
-                hidden
-                );
-
             GalleryManager gm = new GalleryManager(gir);
-            return Ok(await gm.CreateGalleryItem(item));
+            return Ok(await gm.GetGalleryItemByID(id));
         }
+
+        [HttpPost(nameof(CreateGalleryItem))]
+        public async Task<IActionResult> CreateGalleryItem(string title, string description, List<Guid> tags, string tagname, bool hidden) 
+        {
+            GalleryItem galleryItem = new GalleryItem();
+            galleryItem.Title = title;
+            galleryItem.Description = description;  
+            galleryItem.Hidden = hidden;
+            
+
+            foreach (var tag in tags) {
+                galleryItem.Tags.Add(new Tag(tag, tagname));
+            }
+            GalleryManager gm = new GalleryManager(gir);
+            return Ok(await gm.CreateGalleryItem(galleryItem));
+        }
+
+        [HttpPut(nameof(UpdateGalleryItemInfo))]
+        public async Task<IActionResult> UpdateGalleryItemInfo(string test,IFormFile file)
+        {
+            return Ok();
+        }
+
+        [HttpPut(nameof(UpdateGalleryItemFiles))]
+        public async Task<IActionResult> UpdateGalleryItemFiles(IFormFileCollection files)
+        {
+            return Ok();
+        }
+
     }
 }
 

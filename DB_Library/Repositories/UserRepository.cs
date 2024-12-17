@@ -28,8 +28,7 @@ namespace DB_Library.Repositories
 
         public async Task<User> CreateUser(User user)
         {
-            _context.Users
-                .Add(user);
+            _context.Users.Add(user);
             if (_context.SaveChanges() > 0)
             {
                 return user;

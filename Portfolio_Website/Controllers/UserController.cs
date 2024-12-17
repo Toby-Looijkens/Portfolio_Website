@@ -15,7 +15,6 @@ namespace Portfolio_Website.Controllers
         private readonly UserManager userManager;
 
         public UserController() { 
-            userRepository = new UserRepository();
             userManager = new UserManager(userRepository);
         }
 

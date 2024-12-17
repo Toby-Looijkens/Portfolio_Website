@@ -10,7 +10,7 @@ namespace Logic.Utils
 {
     public class FileHandler
     {
-        public TransferableFile CreateTransferableFile(IFormFile file)
+        public ImageLink CreateTransferableFile(IFormFile file)
         {
             //extension
             List<string> validExtensions = new List<string>()
@@ -44,7 +44,7 @@ namespace Logic.Utils
 
             //name changing
             Guid ID = Guid.Empty;
-            TransferableFile temp = new TransferableFile(ID, file.FileName, Path.GetExtension(file.FileName));
+            ImageLink temp = new ImageLink(ID, file.FileName, Path.GetExtension(file.FileName));
             temp.File = file;
             return temp;
         }

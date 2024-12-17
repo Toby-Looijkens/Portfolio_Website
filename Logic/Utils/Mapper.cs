@@ -1,4 +1,5 @@
-﻿using Logic.Entities;
+﻿using Logic.DTOs;
+using Logic.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,18 @@ namespace Logic.Utils
 {
     public class Mapper
     {
-        public User MapFromAsync()
+        public GalleryItemDTO MapGalleryItemToDTO(GalleryItem item)
         {
-            return new User();
+            GalleryItemDTO temp = new GalleryItemDTO();
+            temp.ID = item.ID;
+            temp.Title = item.Title;
+            temp.Description = item.Description;
+            foreach (Tag tag in item.Tags) 
+            {
+                temp.Tags.Add(new TagDTO(tag.ID, tag.Name));
+            }
+
+            return temp;
         }
     }
 }
