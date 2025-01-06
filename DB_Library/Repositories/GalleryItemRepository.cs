@@ -30,6 +30,7 @@ namespace DB_Library.Repositories
             var result = _context.Gallery
                 .Where(x => x.ID == id)
                 .Include(x => x.Tags)
+                .Include(x => x.GalleryImages)
                 .ToList();
 
             return result.FirstOrDefault();
@@ -37,17 +38,32 @@ namespace DB_Library.Repositories
 
         public async Task<GalleryItem> CreateGalleryItem(GalleryItem item)
         {
-            //item.Thumbnail = await UploadFileToStorage(item.Thumbnail.File);
+            List<Tag> tags = new List<Tag>();
 
-            /*for (int i = 0; i < item.GalleryImages.Count(); i++) 
-            {
-                item.GalleryImages[i] = await UploadFileToStorage(item.GalleryImages[i].File);
-            }*/
-
+            foreach (var tag in item.Tags) {
+                if (tag.ID != Guid.Empty) {
+                    tags.Add(_context.Tags.Where(x => x.ID == tag.ID).FirstOrDefault());
+                } else
+                {
+                    tags.Add(tag);
+                }
+            }
+            item.Tags = tags;
             var entity = _context.Add(item);
-            
             _context.SaveChanges();
             return entity.Entity;
+        }
+
+        public async Task<int> DeleteGalleryItem(Guid ID)
+        {
+            _context.Gallery.Remove(_context.Gallery.Where(x => x.ID == ID).FirstOrDefault());
+            return _context.SaveChanges();
+        }
+
+        private async Task<Tag> GetTag(Guid ID)
+        {
+            var result = _context.Tags.FirstOrDefault(x => x.ID == ID);
+            return result;
         }
 
         private async Task<ImageLink> UploadFileToStorage(IFormFile file)

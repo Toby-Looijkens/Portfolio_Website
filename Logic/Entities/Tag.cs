@@ -5,11 +5,13 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Logic.Entities
 {
     public class Tag
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public Guid ID { get; set; }
         public string Name { get; set; }
@@ -21,6 +23,12 @@ namespace Logic.Entities
         { 
             ID = id;
         }
+
+        public Tag(string name)
+        {
+            Name = name;
+        }
+
         public Tag(Guid id, string name) 
         { 
             ID = id;

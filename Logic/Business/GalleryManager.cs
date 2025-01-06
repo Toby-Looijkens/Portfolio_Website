@@ -21,15 +21,19 @@ namespace Logic.Business
         public async Task<GalleryItemDTO> GetGalleryItemByID(Guid id)
         {
             var result = await IGalleryItemRepository.GetGalleryItemByID(id);
-            Mapper mapper = new Mapper();
             
-            return mapper.MapGalleryItemToDTO(result);
+            return Mapper.MapGalleryItemToDTO(result);
         }
 
         public async Task<string> CreateGalleryItem(GalleryItem item)
         {
             GalleryItem galleryItem = await IGalleryItemRepository.CreateGalleryItem(item);
             return galleryItem.ID.ToString();
+        }
+
+        public async Task<int> DeleteGalleryItem(Guid ID)
+        {
+            return await IGalleryItemRepository.DeleteGalleryItem(ID);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DB_Library;
 using Logic.Business;
+using Logic.DTOs;
 using Logic.Entities;
 using Logic.Interfaces;
 using Logic.Utils;
@@ -27,7 +28,7 @@ namespace Portfolio_Website.Controllers
         }
 
         [HttpPost(nameof(CreateGalleryItem))]
-        public async Task<IActionResult> CreateGalleryItem(string title, string description, List<Guid> tags, string tagname, bool hidden) 
+        public async Task<IActionResult> CreateGalleryItem(string title, string description, List<TagDTO> tags, bool hidden) 
         {
             GalleryItem galleryItem = new GalleryItem();
             galleryItem.Title = title;
@@ -36,10 +37,17 @@ namespace Portfolio_Website.Controllers
             
 
             foreach (var tag in tags) {
-                galleryItem.Tags.Add(new Tag(tag, tagname));
+                galleryItem.Tags.Add(Mapper.MapTagDTOToTag(tag));
             }
             GalleryManager gm = new GalleryManager(gir);
             return Ok(await gm.CreateGalleryItem(galleryItem));
+        }
+
+        [HttpDelete(nameof(DeleteGalleryItem))]
+        public async Task<IActionResult> DeleteGalleryItem(Guid ID)
+        {
+            GalleryManager gm = new GalleryManager(gir);
+            return Ok(gm.DeleteGalleryItem(ID));
         }
 
         [HttpPut(nameof(UpdateGalleryItemInfo))]

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace DB_Library
 {
@@ -36,6 +37,26 @@ namespace DB_Library
                 .HasMany(x => x.Tags)
                 .WithMany(x => x.GalleryItems)
                 .UsingEntity(j => j.ToTable("GalleryItemTags"));
+
+
+            modelBuilder.Entity<GalleryItem>().Property(x => x.ID).HasDefaultValueSql("NEWID()");
+            modelBuilder.Entity<Tag>().Property(x => x.ID).HasDefaultValueSql("NEWID()");
+            modelBuilder.Entity<User>().Property(x => x.ID).HasDefaultValueSql("NEWID()");
+            modelBuilder.Entity<Role>().Property(x => x.ID).HasDefaultValueSql("NEWID()");
+            modelBuilder.Entity<DownloadLink>().Property(x => x.ID).HasDefaultValueSql("NEWID()");
+            modelBuilder.Entity<ImageLink>().Property(x => x.ID).HasDefaultValueSql("NEWID()");
         }
+
+        /*private void SetEntityBaseIdDefaultValue(ModelBuilder modelBuilder)
+        {
+            foreach (Type? entityType in modelBuilder.Model.GetEntityTypes()
+                            .Where(etype => etype.ClrType != null)
+                            .Where(etype => typeof(IBaseModel).IsAssignableFrom(etype.ClrType))
+                            .Select(etype => etype.ClrType)
+                    )
+            {
+                modelBuilder.Entity(entityType).Property("Id").HasDefaultValueSql("NEWSEQUENTIALID()");
+            }
+        }*/
     }
 }

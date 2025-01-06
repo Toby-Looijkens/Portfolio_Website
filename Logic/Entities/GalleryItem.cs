@@ -13,6 +13,7 @@ namespace Logic.Entities
 {
     public class GalleryItem
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public Guid ID { get; set; }
         public string? Title { get; set; } = null!;

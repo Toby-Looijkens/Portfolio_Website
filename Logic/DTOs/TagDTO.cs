@@ -10,7 +10,7 @@ namespace Logic.DTOs
     public class TagDTO
     {
         public Guid ID { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public TagDTO(Guid id, string name)
         {

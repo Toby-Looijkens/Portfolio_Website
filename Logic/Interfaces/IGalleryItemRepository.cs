@@ -16,6 +16,6 @@ namespace Logic.Interfaces
         //Task<IEnumerable<GalleryItem>> GetGalleryItemByID(Guid ID);
         Task<GalleryItem> CreateGalleryItem(GalleryItem item);
         //Task<IEnumerable<GalleryItem>> UpdateGalleryItem(GalleryItem item);
-        //Task DeleteGalleryItem(Guid ID);
+        Task<int> DeleteGalleryItem(Guid ID);
     }
 }

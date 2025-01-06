@@ -11,6 +11,7 @@ namespace Logic.Entities
 {
     public class DownloadLink : ITransferableFile
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public Guid ID { get; set; }
         public string Name { get; set; }

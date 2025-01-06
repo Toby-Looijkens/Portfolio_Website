@@ -10,6 +10,7 @@ namespace Logic.Entities
 {
     public class User
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public Guid ID { get; set; }
         public string Username { get; set; } = null!;
