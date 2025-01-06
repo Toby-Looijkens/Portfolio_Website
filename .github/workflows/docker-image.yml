@@ -17,4 +17,4 @@ jobs:
       run: docker build . --file Portfolio_Website/Dockerfile --tag tobylooijkens/portfolio_website:"Portfolio_Website"
       
     - name: Push the Docker image
-      run: docker push --tag tobylooijkens/portfolio_website:"Portfolio_Website"
+      run: docker push tobylooijkens/portfolio_website:"Portfolio_Website"
