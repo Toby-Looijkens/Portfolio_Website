@@ -1,4 +1,5 @@
 ﻿using Logic.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,12 @@ namespace Logic.Interfaces
 {
     public interface IGalleryItemRepository
     {
-        Task<IEnumerable<GalleryItem>> GetAllGalleryItems();
-        Task<IEnumerable<GalleryItem>> GetGalleryItemByID(Guid ID);
-        Task<IEnumerable<GalleryItem>> CreateGalleryItem(GalleryItem item);
-        Task<IEnumerable<GalleryItem>> UpdateGalleryItem(GalleryItem item);
-        Task DeleteGalleryItem(Guid ID);
+        Task<GalleryItem> GetGalleryItemByID(Guid id);
+
+        //Task<IEnumerable<GalleryItem>> GetAllGalleryItems();
+        //Task<IEnumerable<GalleryItem>> GetGalleryItemByID(Guid ID);
+        Task<GalleryItem> CreateGalleryItem(GalleryItem item);
+        //Task<IEnumerable<GalleryItem>> UpdateGalleryItem(GalleryItem item);
+        Task<int> DeleteGalleryItem(Guid ID);
     }
 }

@@ -94,7 +94,8 @@
 
   #logo-image {
     height: 90%;
-    margin-top: 2px;
+    margin-top: auto;
+    margin-bottom: auto;
     background-image: url(../img/Logo.svg);
     background-size: cover;
     aspect-ratio: 1 /1;
@@ -182,9 +183,10 @@
       text-align: left;
     }
     #logo-image {
-      background-image: url(../img/Logo.svg);
       height: 90%;
-      margin-top: 2px;
+      margin-top: auto;
+      margin-bottom: auto;
+      background-image: url(../img/Logo.svg);
       background-size: cover;
       aspect-ratio: 1 /1;
     }

@@ -26,14 +26,28 @@ namespace Logic.Business
 
         }
 
-        public User[] GetAllUsers()
+        public async Task<IEnumerable<User>> GetAllUsers()
         {
-            return new User[0];
+            return await userDB.GetAllUsers();
+        }
+
+        public async Task<User> GetUserByID(Guid ID) { 
+            return await userDB.GetUserByID(ID);
         }
 
         public async Task<User> CreateUser(User user)
         {
             return await userDB.CreateUser(user);
+        }
+
+        public async Task<User> UpdateUser(User user)
+        {
+            return await userDB.UpdateUser(user);
+        }
+
+        public async Task<int> DeleteUser(Guid ID)
+        {
+            return await userDB.DeleteUser(ID);
         }
 
     }
