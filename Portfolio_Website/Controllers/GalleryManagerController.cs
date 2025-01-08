@@ -17,7 +17,7 @@ namespace Portfolio_Website.Controllers
         [HttpGet(nameof(GetAllGalleryItems))]
         public async Task<IActionResult> GetAllGalleryItems()
         {
-            return Ok();
+            return Ok("test");
         }
 
         [HttpGet(nameof(GetGalleryItemByID))]
