@@ -15,9 +15,9 @@ builder.Services.AddCors(setup =>
     {
         b.SetIsOriginAllowed(origin => origin == builder.Configuration.GetValue<string>("OnboardifyUrl"));
         b.AllowCredentials();
-        b.WithHeaders("Access-Control-Allow-Origin");
-        b.WithHeaders("Content-Type");
-        b.WithMethods("GET", "POST", "PUT", "DELETE");
+        b.AllowAnyOrigin();
+        b.AllowAnyHeader();
+        b.AllowAnyMethod();
     });
 });
 ConfigureDbContext<DBContext>(builder.Services, builder.Configuration);
