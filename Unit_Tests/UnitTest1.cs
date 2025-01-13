@@ -18,12 +18,12 @@ namespace Unit_Tests
             Guid guid = Guid.NewGuid();
             TagDTO dto = new TagDTO(guid, "test");
             Tag testTag;
-            Tag tag = new Tag(guid, "test");
+            Tag expected = new Tag(guid, "test");
             //Act
             testTag = Mapper.MapTagDTOToTag(dto);
             //Assert
-            Assert.AreEqual(testTag.ID, tag.ID);
-            Assert.AreEqual(testTag.Name, tag.Name);
+            Assert.AreEqual(expected.ID, testTag.ID);
+            Assert.AreEqual(expected.Name, testTag.Name);
         }
 
         [Test]
@@ -33,12 +33,12 @@ namespace Unit_Tests
             Guid guid = Guid.Empty;
             TagDTO dto = new TagDTO(guid, "test");
             Tag testTag;
-            Tag tag = new Tag(guid, "test");
+            Tag expected = new Tag(guid, "test");
             //Act
             testTag = Mapper.MapTagDTOToTag(dto);
             //Assert
-            Assert.AreEqual(testTag.ID, tag.ID);
-            Assert.AreEqual(testTag.Name, tag.Name);
+            Assert.AreEqual(expected.ID, testTag.ID);
+            Assert.AreEqual(expected.Name, testTag.Name);
         }
     }
 }

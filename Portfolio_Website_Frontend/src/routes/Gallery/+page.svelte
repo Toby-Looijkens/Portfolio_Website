@@ -1,18 +1,19 @@
 <script>
+  import { title } from "process";
   import { onMount } from "svelte";
-  export let data;
 
+  export let data;
   onMount(async () => {
     const url = "http://localhost:27777/api/GalleryManager/GetAllGalleryItems";
     const res = await fetch(url);
-    console.log(res);
-    const product = await res.json();
-    return { props: { data } };
+    data = await res.json();
+    console.log(data);
+    return data;
   });
 </script>
 
 <body>
-  <h1>Gallery {data}</h1>
+  <h1>Gallery {data.title}</h1>
 </body>
 
 <style>
