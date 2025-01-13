@@ -14,7 +14,7 @@ builder.Services.AddCors(setup =>
     setup.AddDefaultPolicy(b =>
     {
         // b.SetIsOriginAllowed(origin => origin == "http://localhost:5173");
-        b.AllowAnyOrigin();
+        b.WithOrigins("http://localhost:5173"));
         b.AllowAnyHeader();
         b.AllowAnyMethod();
     });
