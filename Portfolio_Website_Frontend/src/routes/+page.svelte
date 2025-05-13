@@ -1,13 +1,69 @@
-<script>
+<script lang="ts">
+  import BlackoutBlock from "$lib/blackout-block.svelte";
   import Gallerycard from "$lib/gallerycard.svelte";
+  import { onMount } from "svelte";
+
+  let hasClicked = false;
+  let totalRipples = 3;
+
+  let rippleX = "0px";
+  let rippleY = "0px";
+
+  const ripples = ["small-ripple", "small-ripple", "big-ripple"];
+
+  onMount(() => {
+    const blackout = document.getElementById("blackout");
+    blackout?.style.grid;
+    //@ts-ignore
+    blackout.addEventListener("mousemove", (event) => {
+      rippleX = event.clientX.toString() + "px";
+      rippleY = event.clientY.toString() + "px";
+    });
+  });
+
+  function Ripple() {
+    if (hasClicked) {
+      return;
+    }
+
+    var rippleLocation = document.getElementById("ripple-location");
+    //@ts-ignore
+    rippleLocation.style.left = rippleX;
+    //@ts-ignore
+    rippleLocation.style.top = rippleY;
+
+    for (var i = 0; i < totalRipples; i++) {
+      var ripple = document.createElement("div");
+      ripple.classList.add("ripple");
+      ripple.classList.add(ripples[i]);
+      ripple.style.position = "fixed";
+      ripple.style.left = rippleX;
+      ripple.style.top = rippleY;
+      ripple.style.transitionDelay = (0.2 * (i + 1)).toString() + "s";
+      ripple.style.aspectRatio = " 1 / 1";
+      rippleLocation?.appendChild(ripple);
+      void ripple.offsetWidth;
+      ripple.classList.add("ripple-expand");
+
+      ripple.addEventListener("transitionend", () => {
+        ripple.remove();
+      });
+    }
+    hasClicked = true;
+    //@ts-ignore
+    document.getElementsById("blackout").style.opacity = "0";
+  }
 </script>
 
 <body>
+  <!--<div id="blackout" on:click={() => Ripple()}>
+    <div id="ripple-location"></div>
+  </div>-->
   <div id="main">
     <div id="banner">
       <div id="banner-text">
         <h1>Toby Looijkens</h1>
-        <p>3D Modelling | Animation | 3D concepts</p>
+        <p>3D Modelling | Programming</p>
       </div>
     </div>
     <div id="works">
@@ -32,6 +88,47 @@
 
   #main {
     margin: 0px;
+  }
+
+  #blackout {
+    margin-top: -70px;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    background-color: rgba(15, 15, 15, 0.8);
+  }
+
+  :global(.small-ripple) {
+    background-image: url(../img/Water-Small-Ripple.svg);
+  }
+
+  :global(.big-ripple) {
+    background-image: url(../img/Water-Ripple.svg);
+  }
+
+  #ripple-location {
+    position: fixed;
+    width: 5%;
+    height: 5%;
+    left: -2.5%;
+    top: -2.5%;
+  }
+
+  :global(.ripple) {
+    background-size: cover;
+    position: fixed;
+    width: 4%;
+    transform: translate(-50%, -50%) scale(0);
+    aspect-ratio: 1 /1;
+    transition: 1s;
+    transform-origin: center;
+    transition-timing-function: cubic-bezier(0.27, 0.56, 0.78, 0.63);
+  }
+
+  :global(.ripple-expand) {
+    transform: translate(-50%, -50%) scale(5);
+    opacity: 0%;
   }
 
   #banner {
