@@ -4,13 +4,14 @@
   import Linkbar from "$lib/linkbar.svelte";
 </script>
 
-<header>
+<!-- <header>
   <Header></Header>
-</header>
+</header> -->
 <slot></slot>
-<footer>
+
+<!-- <footer>
   <Footer></Footer>
-</footer>
+</footer> -->
 
 <style>
 </style>

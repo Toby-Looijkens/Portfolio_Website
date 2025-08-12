@@ -4,7 +4,7 @@
 
   export let data;
   onMount(async () => {
-    const url = "http://localhost:27777/api/GalleryManager/GetAllGalleryItems";
+    const url = "http://127.0.0.1:27777/api/GalleryManager/GetAllGalleryItems";
     const res = await fetch(url);
     data = await res.json();
     console.log(data);

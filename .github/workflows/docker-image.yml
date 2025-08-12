@@ -22,7 +22,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     
     - name: Build the Docker image
-      run: docker build . --file Portfolio_Website/Dockerfile --tag tobylooijkens/portfolio_website:"Portfolio_Website"
+      run: docker build --file Portfolio_Website/Dockerfile --tag tobylooijkens/portfolio_website:"Portfolio_Website" .
       
     - name: Push the Docker image
       run: docker push tobylooijkens/portfolio_website:"Portfolio_Website"
