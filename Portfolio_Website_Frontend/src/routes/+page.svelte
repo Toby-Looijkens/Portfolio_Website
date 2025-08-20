@@ -1,15 +1,33 @@
 <script lang="ts">
   import SegmentedScrollbar from "$lib/Segmented_Scrollbar.svelte";
   import Footer from "$lib/footer.svelte";
+  import { onMount } from "svelte";
+
+  var height: number;
+
+  onMount(() => {
+    var body = document.body,
+      html = document.documentElement;
+
+    height = Math.max(html.offsetHeight);
+  });
+
+  const sections = [
+    { id: "home" },
+    { id: "featured" },
+    { id: "other" },
+    { id: "extra" },
+    { id: "contact" },
+  ];
 </script>
 
-<body>
-  <section></section>
-  <section></section>
-  <section></section>
-  <section></section>
-  <section></section>
-  <SegmentedScrollbar></SegmentedScrollbar>
+<body id="body">
+  <section id={sections[0].id}></section>
+  <section id={sections[1].id}></section>
+  <section id={sections[2].id}></section>
+  <section id={sections[3].id}></section>
+  <section id={sections[4].id}></section>
+  <SegmentedScrollbar {sections} pageHeight={height}></SegmentedScrollbar>
 </body>
 <footer>
   <Footer></Footer>
@@ -34,7 +52,7 @@
 
   section {
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
     border: 1px solid white;
   }
 

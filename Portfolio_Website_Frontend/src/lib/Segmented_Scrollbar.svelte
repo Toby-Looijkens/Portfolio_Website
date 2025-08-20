@@ -1,6 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import BlackoutBlock from "./blackout-block.svelte";
 
+  export let sections: { id: string }[];
+  export let pageHeight: number;
   let headings;
   let scrollIndex = 0;
 
@@ -9,32 +12,76 @@
     console.log(headings.length);
   });
 
-  window.onscroll = function UpdateScrollBar() {
-    document.body.scrollTop;
-  };
+  if (typeof window !== "undefined") {
+    window.onscroll = function UpdateScrollBar() {
+      let containerHeight: number =
+        document.getElementById("scrollbar")!.offsetHeight;
+      let scrollerHeight: number =
+        document.getElementById("scroller")!.offsetHeight;
+
+      let maxOffset: number = containerHeight - scrollerHeight;
+
+      console.log(
+        (window.pageYOffset /
+          (pageHeight -
+            document.getElementById(sections[4].id)!.offsetHeight)) *
+          maxOffset,
+      );
+
+      document.getElementById("scroller")!.style.transform =
+        `translate(-20%, ${(window.pageYOffset / (pageHeight - window.innerHeight)) * maxOffset}px`;
+    };
+  }
 
   function OpenMenu() {}
 
   function CloseMenu() {}
+
+  function ScrollOnClick(target: string) {
+    var elementToView = document.getElementById(target);
+    if (elementToView) {
+      elementToView.scrollIntoView({ behavior: "smooth" });
+    }
+  }
 </script>
 
 <div id="menu">
   <div id="headings">
-    <div class="heading_container">
-      <h3 id="home" class="heading highlight">Home</h3>
-    </div>
-    <div class="heading_container">
-      <h3 id="featured" class="heading big">Featured Works</h3>
-    </div>
-    <div class="heading_container">
-      <h3 id="other" class="heading medium">Other Projects</h3>
-    </div>
-    <div class="heading_container">
-      <h3 id="extra" class="heading small">Extras</h3>
-    </div>
-    <div class="heading_container">
-      <h3 id="contact" class="heading extra_small">Contact</h3>
-    </div>
+    <h3
+      id="nav_home"
+      class="heading highlight"
+      on:click={() => ScrollOnClick(sections[0].id)}
+    >
+      Home
+    </h3>
+    <h3
+      id="nav_featured"
+      class="heading big"
+      on:click={() => ScrollOnClick(sections[1].id)}
+    >
+      Featured Projects
+    </h3>
+    <h3
+      id="nav_other"
+      class="heading medium"
+      on:click={() => ScrollOnClick(sections[2].id)}
+    >
+      Other Projects
+    </h3>
+    <h3
+      id="nav_extra"
+      class="heading small"
+      on:click={() => ScrollOnClick(sections[3].id)}
+    >
+      Extras
+    </h3>
+    <h3
+      id="nav_contact"
+      class="heading extra_small"
+      on:click={() => ScrollOnClick(sections[4].id)}
+    >
+      Contact
+    </h3>
   </div>
   <div id="scrollbar">
     <div id="scroller"></div>
@@ -57,25 +104,26 @@
 
   #headings {
     width: 90%;
-    height: 100%;
+    height: 96%;
     padding-right: 2%;
-    text-align: right;
+    justify-content: right;
     display: grid;
     grid-template-rows: repeat(5, 1fr);
     margin: 2px;
   }
 
   .heading {
+    display: flex;
     margin: 0px;
-    align-content: center;
+    width: auto;
+    justify-content: flex-end;
+    text-align: right;
+    align-items: center;
     font-family: "Orbitron", sans-serif;
     color: #a3a5a6;
     font-optical-sizing: auto;
     font-weight: 700;
-  }
-
-  .heading_container {
-    align-content: center;
+    padding: 1%;
   }
 
   #scrollbar {
@@ -88,9 +136,11 @@
   }
 
   #scroller {
-    width: 120%;
+    display: inline-block;
+    position: absolute;
+    width: 3%;
     height: 20%;
-    transform: translate(-5%, 0);
+    transform: translateX(-50%);
     border-radius: 5px;
     background-color: #d9d9d9;
   }
@@ -109,11 +159,11 @@
   .heading.highlight {
     color: white;
     font-size: 2.5vmin;
-    padding-right: 1%;
+    padding-right: 2%;
   }
 
   .heading.highlight:hover {
-    padding-right: 2%;
+    padding-right: 3%;
   }
 
   .heading.big {
