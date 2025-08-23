@@ -140,7 +140,7 @@
     position: absolute;
     width: 3%;
     height: 20%;
-    transform: translateX(-50%);
+    transform: translateX(-20%);
     border-radius: 5px;
     background-color: #d9d9d9;
   }
