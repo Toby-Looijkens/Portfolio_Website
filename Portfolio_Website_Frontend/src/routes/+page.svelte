@@ -29,11 +29,9 @@
       <div id="logo-image"></div>
       <div id="logo-name">Toby Looijkens</div>
     </div>
-    <div id="banner-title"></div>
-    <div id="banner-text">Bringing creativity to the world of</div>
-    <div id="firstinterchange">3D</div>
-    <div id="secondinterchange">Software</div>
-    <div id="bold-text"></div>
+    <div id="viewer3D">
+
+    </div>
   </section>
   <section id={sections[1].id}></section>
   <section id={sections[2].id}></section>
@@ -70,7 +68,7 @@
   #home {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 10% 90%;
+    grid-template-rows: 6% 6% 88%;
   }
 
   #logo {
@@ -96,55 +94,22 @@
     font-family: "Orbitron", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;
-    font-size: 7vmin;
+    font-size: 4vmin;
     align-items: center;
     margin-left: 1%;
     text-shadow: 2px 2px rgba(10, 10, 10, 0.1);
   }
 
-  #banner-text {
-    grid-column-start: 2;
-    grid-column-end: 5;
-    grid-row-start: 2;
-    grid-row-end: 2;
-    margin-left: 5%;
-    justify-self: center;
-    align-self: center;
-    color: white;
-    font-family: "Orbitron", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 900;
-    font-size: 6.5vmin;
-  }
-
-  #firstinterchange {
-    grid-column-start: 2;
-    grid-column-end: 5;
-    grid-row-start: 7;
-    grid-row-end: 8;
-    margin-left: 5%;
-    justify-self: center;
-    align-self: center;
-    color: white;
-    font-family: "Orbitron", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 900;
-    font-size: 14vmin;
-  }
-
-  #secondinterchange {
-    grid-column-start: 2;
-    grid-column-end: 5;
-    grid-row-start: 7;
-    grid-row-end: 8;
-    margin-left: 5%;
-    justify-self: center;
-    align-self: center;
-    color: white;
-    font-family: "Orbitron", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 900;
-    font-size: 14vmin;
+  #viewer3D {
+    grid-row: 3 / span 1;
+    grid-column: 1 / span 12;
+    margin-left: 2%;
+    width: 60%;
+    height: 80%;
+    background-color: rgba(100, 10, 10, 0);
+    border-radius: 5%;
+    border: 5px solid rgba(10, 10, 10, 0.5);
+    box-shadow: 0px 0px 5px 5px rgba(10, 10, 10, 0.5);
   }
 
   @media only screen and (min-width: 560px) {
